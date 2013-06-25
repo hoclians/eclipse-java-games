@@ -39,25 +39,31 @@ public class Board extends JPanel implements ActionListener{
 	public void paint(Graphics g){
 		super.paint(g);
 		if(ingame=true){
+			//KEEP PLAYER CENTERED IN WINDOW
 			g.translate(-Updates.hero_getX()+425,-Updates.hero_getY()+325);
-			
+			//BACKGROUND
 			g.drawImage(Updates.back_getImage(),-2500,-2500, this);
+			//PLAYER
 			if(Hero.isVisible())
                 g.drawImage(Hero.getImage(),Updates.hero_getX(),Updates.hero_getY(),this);
+			//FIREBALL
             for(int i=0;i<ms.size();i++){
                 fireBall m=(fireBall)ms.get(i);
                 g.drawImage(m.getImage(),m.getX(),m.getY(),this);
             }
+            //ENEMY
             for (int i=0;i<Updates.getEnemySize();i++){
                 Enemy a=(Enemy)Updates.getEnemys().get(i);
                 if(a.isVisible())
                     g.drawImage(a.getImage(),a.getX(),a.getY(),this);
             }
+            //WALL TILES
             for (int i=0;i<Updates.getWallSize();i++){
                 Wall a=(Wall)Updates.getWall().get(i);
                 if(a.isVisible())
                     g.drawImage(a.getImage(),a.getX(),a.getY(),this);
             }
+            //STUFF TO STAY ON SCREEN WHILE MOVING
             g.setColor(Color.WHITE);
             g.drawString("HEALTH: "+Hero.getHealth(),Updates.hero_getX()-425,Updates.hero_getY()-293);
             g.drawString("MAGICA:  "+Enemy.getHealth(),Updates.hero_getX()-425,Updates.hero_getY()-271);
